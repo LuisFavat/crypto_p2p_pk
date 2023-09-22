@@ -6,9 +6,9 @@ public class UserBuilder {
 
     private String name = "none";
     private String lastName = "none";
-    private String address = "none";
-    private String email = "none";
-    private String password = "none";
+    private String address = "None adress";
+    private String email = "none@gmail.com";
+    private String password = "None_password";
 
     public static UserBuilder aUser()
     {

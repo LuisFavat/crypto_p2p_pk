@@ -1,4 +1,4 @@
-package ar.model.Factory;
+package ar.model.factory;
 
 import ar.edu.unq.cryptop2p.model.User;
 

@@ -1,12 +1,10 @@
 package ar.model;
-import static ar.model.Factory.UserFactory.*;
 import static ar.model.builders.UserBuilder.aUser;
+import static ar.model.factory.UserFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ar.edu.unq.cryptop2p.model.User;
-import ar.edu.unq.cryptop2p.model.exceptions.UserNameException;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 
 
 public class UserTest {
@@ -143,7 +141,7 @@ public class UserTest {
 
         try
         {
-            user = aUser().withEmail(email).Build();
+            user = aUserWithEmail(email);
         }
         catch (Exception ex)
         {
@@ -172,7 +170,7 @@ public class UserTest {
 
         try
         {
-            user = aUser().withEmail(email).Build();
+            user = aUserWithEmail(email);
         }
         catch (Exception ex)
         {
@@ -203,14 +201,14 @@ public class UserTest {
 
         try
         {
-            user = aUser().withEmail(email).Build();
+            user = aUserWithEmail(email);
         }
         catch (Exception ex)
         {
             myException  = ex;
         }
 
-        assertEquals(myException.getMessage(), "Invalid Email Format");
+        assertEquals("Invalid Email Format", myException.getMessage());
     }
 
     @Test
