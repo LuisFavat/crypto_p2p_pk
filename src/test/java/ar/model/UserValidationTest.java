@@ -1,14 +1,13 @@
 package ar.model;
-import static ar.model.builders.UserBuilder.aUser;
 import static ar.model.factory.UserFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ar.edu.unq.cryptop2p.model.User;
+import ar.model.builders.UserBuilder;
 import org.junit.jupiter.api.Test;
 
 
-public class UserTest {
-
+public class UserValidationTest {
     //region name
     @Test
     void ValidationOnUserNameCaseLessThanMinimunLength()
@@ -19,7 +18,7 @@ public class UserTest {
 
         try
         {
-            user = aUser().withName(nameWithLessLenghtThanMinumun).Build();
+            user = UserBuilder.anyUser().withName(nameWithLessLenghtThanMinumun).build();
         }
         catch (Exception ex)
         {
@@ -38,7 +37,7 @@ public class UserTest {
 
         try
         {
-            user = aUser().withName(nameWithMoreThanMaximum).Build();
+            user = UserBuilder.anyUser().withName(nameWithMoreThanMaximum).build();
         }
         catch (Exception ex)
         {
@@ -80,7 +79,7 @@ public class UserTest {
 
         try
         {
-            user = aUser().withName(lastNameWithLessLenghtThanMinumun).Build();
+            user = UserBuilder.anyUser().withName(lastNameWithLessLenghtThanMinumun).build();
         }
         catch (Exception ex)
         {
@@ -100,7 +99,7 @@ public class UserTest {
 
         try
         {
-            user = aUser().withName(lastNameWithMoreThanMaximum).Build();
+            user = UserBuilder.anyUser().withName(lastNameWithMoreThanMaximum).build();
         }
         catch (Exception ex)
         {

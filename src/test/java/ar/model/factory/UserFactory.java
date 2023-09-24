@@ -4,6 +4,9 @@ import ar.edu.unq.cryptop2p.model.User;
 
 public class UserFactory {
 
+    public static User anyUser() throws Exception {
+        return new User("Victor","Hugo", "Francia 123" , "victorhugo@gmail.com", "Very_Secret!", "123456789_123456789_12", "12345678");
+    }
     public static User aUserWithPassword(String aPassword) throws Exception {
         return new User("Victor","Hugo", "Francia 123" , "victorhugo@gmail.com", aPassword, "123456789_123456789_12", "12345678");
     }

@@ -2,28 +2,21 @@ package ar.edu.unq.cryptop2p.model;
 
 public  class USD {
 
-    //Prices from point of view of the user
-    public static float sellPrice;
-    public static float buyPrice;
+    private static float price;
 
-    public USD(float sellPrice, float buyPrice)
+    public USD(float price)
     {
-        USD.sellPrice = sellPrice;
-        USD.buyPrice = buyPrice;
+        USD.price = price;
     }
 
-    public static float USDBuyPrice() {
-        return buyPrice;
+    public static void setPrice(float price)
+    {
+        USD.price = price;
     }
 
-    public void setBuyPrice(float buyPrice) {
-        USD.buyPrice = buyPrice;
-    }
-    public static float USDSellPrice() {
-        return sellPrice;
+    public static float getPrice()
+    {
+        return price;
     }
 
-    public void setSellPrice(float sellPrice) {
-        USD.sellPrice = sellPrice;
-    }
 }

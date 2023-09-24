@@ -10,7 +10,7 @@ import java.text.MessageFormat;
 public abstract class Intention
 {
     protected Crypto crypto;
-    private float amount;
+    protected float amount;
     private User user;
     private float intentionPrice;
     private float maxIndex = 1.05f;
@@ -24,10 +24,11 @@ public abstract class Intention
         setIntentionPrice(intentionPrice);
     }
 
-    public float operationAmountInPesos()
+    public float amountOperationInUSD()
     {
-        return amount * crypto.getPrice() * USD.USDSellPrice();
+        return crypto.getPrice() * amount;
     }
+
 
     private void setIntentionPrice(float intentionPrice) throws IntentionPriceException {
         if(isGreaterThanMax(intentionPrice))

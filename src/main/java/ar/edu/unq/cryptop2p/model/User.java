@@ -14,6 +14,7 @@ public class User {
     private String cvu;
     private String cryptoAddress;
     private String address;
+    private int operations;
 
 
     public User(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress) throws Exception {
@@ -24,7 +25,7 @@ public class User {
        setPassword(aPassword);
        setCvu(aCvu);
        setCryptoAddress(aCryptoAddress);
-
+       operations = 0;
     }
 
     public void setName(String aName) throws UserNameException {

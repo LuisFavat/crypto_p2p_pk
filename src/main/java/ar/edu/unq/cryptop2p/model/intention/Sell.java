@@ -1,8 +1,8 @@
 package ar.edu.unq.cryptop2p.model.intention;
 
 import ar.edu.unq.cryptop2p.model.Crypto;
+import ar.edu.unq.cryptop2p.model.USD;
 import ar.edu.unq.cryptop2p.model.User;
-import ar.edu.unq.cryptop2p.model.exceptions.IntentionPriceException;
 
 public class Sell extends Intention
 {

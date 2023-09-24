@@ -10,18 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IntentionTests
 {
     @Test
-    void return_operation_amount_in_pesos() throws Exception {
-        var cryptoPrice = 30000;
-        var usdSellPrice = 700;
-        var cryptoAmount = 0.01f;
-        var crypto = anyCrypto().withPrice(cryptoPrice).build();
-        var intention = buyIntention().withAmount(cryptoAmount).withCrypto(crypto).build();
-        USD.sellPrice = usdSellPrice;
-
-        assertEquals(cryptoAmount * cryptoPrice * usdSellPrice, intention.operationAmountInPesos());
-    }
-
-    @Test
     void cant_create_intention_case_intention_price_to_high()
     {
         var cryptoPrice = 30000;
