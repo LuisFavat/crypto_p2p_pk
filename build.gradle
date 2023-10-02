@@ -36,4 +36,5 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	gradle test jacocoTestReport sonarqube
 }
