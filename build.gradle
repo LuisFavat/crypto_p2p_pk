@@ -2,12 +2,18 @@ plugins {
 	id 'java'
 	id 'war'
 	id 'org.springframework.boot' version '3.1.2'
+	id 'jacoco'
+	id 'org.sonarqube' version '3.5.0.2730'
 	id 'io.spring.dependency-management' version '1.1.2'
 }
 
 group = 'ar.edu.unq'
 version = '0.0.1-SNAPSHOT'
-
+jacocoTestReport {
+	reports {
+		xml.required = true
+	}
+}
 java {
 	sourceCompatibility = '17'
 }

@@ -2,27 +2,29 @@ package ar.edu.unq.cryptop2p.model;
 
 import ar.edu.unq.cryptop2p.model.exceptions.StateException;
 import ar.edu.unq.cryptop2p.model.intention.Intention;
-import ar.edu.unq.cryptop2p.model.state.State;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Transaction
 {
     private Intention intention;
     private User interesed;
-    private State state;
     private Status status;
+    private LocalDateTime creationTime;
+    private LocalDateTime finishTime;
+    private float operatedAmountInPesos;
 
 
-    public Transaction (Intention intention, User interested, Status status, State state)
+
+    public Transaction (Intention intention, User interested, Status status)
     {
         this.intention = intention;
         this.interesed = interested;
-        this.state = state;
         this.status = status;
-    }
-
-    public void setState(State state)
-    {
-        this.state = state;
+        this.creationTime = LocalDateTime.now();
+        System.out.println(creationTime);
+        operatedAmountInPesos = setOperationAmountInPesos();
     }
 
     public Status getStatus()
@@ -35,23 +37,68 @@ public class Transaction
         this.status = status;
     }
 
-    public void transferDone() throws StateException {
-        state.transferNotification(this);
+    public void notificationOfCashTransferred() throws StateException {
+        //state.transferred();
+        if(status != Status.STEP_1_WAITING_CASH_TRANSFER_CONFIRMATION)
+        {
+            throw new StateException("You try to send .cashTranferred() message in an inconsistent state of the transaction");
+        }
+        status = Status.STEP_2_WAITING_CRYPTO_TRANSFER_CONFIRMATION;
     }
 
-    public void confirm() throws StateException
+
+
+    public void notificationOfCryptoTransfered() throws  StateException
     {
-        state.confirmNotification(this);
+        if(status != Status.STEP_2_WAITING_CRYPTO_TRANSFER_CONFIRMATION)
+        {
+            throw new StateException("You try to send .cryptoTransfered() message in an inconsistent state of the transaction");
+        }
+        if(intention.isIntentionPriceOutsideMinAndMax())
+        {
+            status = Status.CANCELLED_BY_SYSTEM_PRICE_OUT_OF_RANGE;
+        }
+        else
+        {
+            finishTime = LocalDateTime.now();
+            status = Status.SUCCESFUL;
+            addPointsToUsers();
+        }
     }
 
-    public void cancel() throws StateException
+
+    private void addPointsToUsers()
     {
-        state.cancel(this);
+        var duration = Duration.between(creationTime, finishTime).toMinutes();
+        interesed.addPointsAccordingToDuration(duration);
+        intention.getUser().addPointsAccordingToDuration(duration);
+    }
+    private void cancel() throws StateException
+    {
+        if(status == Status.CANCELLED_BY_USER || status == Status.SUCCESFUL )
+        {
+            throw new StateException("You try to send .cancel() message in an inconsistent state of the transaction");
+        }
+        status = Status.CANCELLED_BY_USER;
     }
 
+    private void punish(User user)
+    {
+        user.punish();
+    }
 
-    public float operationAmountInPesos()
+    public void cancelTransactionAndPunish(User user) throws StateException {
+        this.cancel();
+        punish(user);
+    }
+
+    private float setOperationAmountInPesos()
     {
         return  intention.amountOperationInUSD() * USD.getPrice();
+    }
+
+    public float getOperatedAmountInPesos()
+    {
+        return operatedAmountInPesos;
     }
 }

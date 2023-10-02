@@ -9,4 +9,5 @@ public class Buy extends Intention
     public Buy(Crypto crypto, float amount, float intentionPrice, User user) throws Exception {
         super(crypto, amount, intentionPrice, user);
     }
+
 }

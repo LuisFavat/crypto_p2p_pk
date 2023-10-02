@@ -14,10 +14,15 @@ public class User {
     private String cvu;
     private String cryptoAddress;
     private String address;
-    private int operations;
+    private int succesfulOperations;
+    private int points;
+    private float reputation;
+    private float punishReputation = 20f;
+    private int pointBeforeTimeLimit = 10;
+    private int pointAfterTimeLimit = 5;
+    private int durationMinutesLimit = 0;
 
-
-    public User(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress) throws Exception {
+    public User(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress, int succesfulOperations, float reputation, int points) throws Exception {
        setName(aName);
        setLastName(aLastName);
        setAddres(aAddress);
@@ -25,7 +30,15 @@ public class User {
        setPassword(aPassword);
        setCvu(aCvu);
        setCryptoAddress(aCryptoAddress);
-       operations = 0;
+       this.succesfulOperations = succesfulOperations;
+       this.points = points;
+       this.reputation = reputation;
+
+    }
+
+    public int getPoints()
+    {
+        return points;
     }
 
     public void setName(String aName) throws UserNameException {
@@ -126,4 +139,44 @@ public class User {
         return cryptoAddress;
     }
     //endregion
+    public float getReputation()
+    {
+        return reputation;
+    }
+
+    public int getSuccesfulOperations()
+    {
+        return succesfulOperations;
+    }
+
+    public void punish()
+    {
+        if(reputation - punishReputation < 0)
+        {
+            reputation = 0;
+        }
+        else
+        {
+            reputation -= punishReputation;
+        }
+    }
+
+    public void addPointsAccordingToDuration(long transactionDuration)
+    {
+        if(transactionDuration <= durationMinutesLimit)
+        {
+           // points += pointBeforeTimeLimit;
+            addPoints(pointBeforeTimeLimit);
+        }
+        else
+        {
+            //points += pointAfterTimeLimit;
+            addPoints(pointAfterTimeLimit);
+        }
+    }
+
+    private void addPoints(int points)
+    {
+        this.points += points;
+    }
 }

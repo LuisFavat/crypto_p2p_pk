@@ -4,8 +4,8 @@ import ar.edu.unq.cryptop2p.model.Status;
 import ar.edu.unq.cryptop2p.model.Transaction;
 import ar.edu.unq.cryptop2p.model.User;
 import ar.edu.unq.cryptop2p.model.intention.Intention;
-import ar.edu.unq.cryptop2p.model.state.CashTranfer;
-import ar.edu.unq.cryptop2p.model.state.State;
+
+import java.time.LocalDateTime;
 
 import static ar.model.builders.IntentionBuilder.anyIntention;
 import static ar.model.factory.UserFactory.anyUser;
@@ -14,8 +14,8 @@ public class TransactionBuilder
 {
     private Intention intention = anyIntention().build();
     private User user = anyUser();
-    private State state = new CashTranfer();
-    private Status status = Status.active;
+    private Status status = Status.STEP_1_WAITING_CASH_TRANSFER_CONFIRMATION;
+    //private LocalDateTime creationTime = LocalDateTime.now();
 
     public TransactionBuilder() throws Exception {
     }
@@ -30,17 +30,20 @@ public class TransactionBuilder
         return this;
     }
 
-    public TransactionBuilder withUser(User user)
+    public TransactionBuilder withInteresedUser(User user)
     {
         this.user = user;
         return this;
     }
 
-    public  TransactionBuilder withState(State state)
+    /*
+    public TransactionBuilder withCreationTime(LocalDateTime creationTime)
     {
-        this.state = state;
-        return  this;
+        this.creationTime = creationTime;
+        return this;
     }
+
+     */
 
     public TransactionBuilder withStatus(Status status)
     {
@@ -50,6 +53,6 @@ public class TransactionBuilder
 
     public Transaction build()
     {
-        return new Transaction(intention, user, status, state);
+        return new Transaction(intention, user, status);
     }
 }

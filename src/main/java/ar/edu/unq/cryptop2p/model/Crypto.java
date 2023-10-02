@@ -27,4 +27,10 @@ public class Crypto {
     {
         return time;
     }
+
+    public void updateTimeAndPrice(LocalDateTime time, float price)
+    {
+        this.time = time;
+        this.price = price;
+    }
 }
