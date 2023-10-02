@@ -30,8 +30,6 @@ jobs:
         distribution: 'temurin'
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
-    - name: SonarCloud
-      runs-on: ubuntu-latest
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
