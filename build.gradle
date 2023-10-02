@@ -9,11 +9,7 @@ plugins {
 
 group = 'ar.edu.unq'
 version = '0.0.1-SNAPSHOT'
-jacocoTestReport {
-	reports {
-		xml.required = true
-	}
-}
+
 java {
 	sourceCompatibility = '17'
 }
@@ -34,7 +30,14 @@ dependencies {
 	testImplementation "org.mockito:mockito-core:3.+"
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
-	gradle test jacocoTestReport sonarqube
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn(test)
+	reports {
+		xml.required = true
+	}
 }
