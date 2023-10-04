@@ -3,8 +3,16 @@ plugins {
 	id 'war'
 	id 'org.springframework.boot' version '3.1.2'
 	id 'jacoco'
-	id 'org.sonarqube' version '3.5.0.2730'
+	id "org.sonarqube" version "4.3.1.3277"
 	id 'io.spring.dependency-management' version '1.1.2'
+}
+
+sonar {
+	properties {
+		property "sonar.projectKey", "LuisFavat_cypto_p2p_pk"
+		property "sonar.organization", "luisf"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
 }
 
 group = 'ar.edu.unq'
