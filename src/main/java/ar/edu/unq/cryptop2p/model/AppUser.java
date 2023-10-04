@@ -1,14 +1,22 @@
 package ar.edu.unq.cryptop2p.model;
 
-import ar.edu.unq.cryptop2p.model.Validators.Validator;
+import ar.edu.unq.cryptop2p.model.Validators.UserDataValidator;
 import ar.edu.unq.cryptop2p.model.exceptions.*;
+import jakarta.persistence.*;
 
 import java.text.MessageFormat;
+@Entity
+public class AppUser {
 
-public class User {
-    private Validator validator = new Validator();
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+    //TODO question aca tuve que inicializar asi, no me toma el new del constructor
+    @Transient
+    private UserDataValidator validator = new UserDataValidator();
     private String name;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
     private String cvu;
@@ -17,12 +25,16 @@ public class User {
     private int succesfulOperations;
     private int points;
     private float reputation;
+    @Transient
     private float punishReputation = 20f;
+    @Transient
     private int pointBeforeTimeLimit = 10;
+    @Transient
     private int pointAfterTimeLimit = 5;
+    @Transient
     private int durationMinutesLimit = 0;
 
-    public User(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress, int succesfulOperations, float reputation, int points) throws Exception {
+    public AppUser(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress, int succesfulOperations, float reputation, int points) throws Exception {
        setName(aName);
        setLastName(aLastName);
        setAddres(aAddress);
@@ -33,6 +45,7 @@ public class User {
        this.succesfulOperations = succesfulOperations;
        this.points = points;
        this.reputation = reputation;
+       this.validator =  new UserDataValidator();
 
     }
 

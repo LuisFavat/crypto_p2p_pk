@@ -2,23 +2,23 @@ package ar.model;
 import static ar.model.factory.UserFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import ar.edu.unq.cryptop2p.model.User;
+import ar.edu.unq.cryptop2p.model.AppUser;
 import ar.model.builders.UserBuilder;
 import org.junit.jupiter.api.Test;
 
 
-public class UserValidationTest {
+public class AppUserValidationTest {
     //region name
     @Test
     void ValidationOnUserNameCaseLessThanMinimunLength()
     {
         Exception myException = null;
         var nameWithLessLenghtThanMinumun = "lu";
-        User user;
+        AppUser appUser;
 
         try
         {
-            user = UserBuilder.anyUser().withName(nameWithLessLenghtThanMinumun).build();
+            appUser = UserBuilder.anyUser().withName(nameWithLessLenghtThanMinumun).build();
         }
         catch (Exception ex)
         {
@@ -32,12 +32,12 @@ public class UserValidationTest {
     void ValidationOnUserNameCaseMoreThanMaximum()
     {
         Exception myException = null;
-        User user;
+        AppUser appUser;
         var nameWithMoreThanMaximum = "123456789_123456789_123456789_1";
 
         try
         {
-            user = UserBuilder.anyUser().withName(nameWithMoreThanMaximum).build();
+            appUser = UserBuilder.anyUser().withName(nameWithMoreThanMaximum).build();
         }
         catch (Exception ex)
         {
@@ -75,11 +75,11 @@ public class UserValidationTest {
     {
         Exception myException = null;
         var lastNameWithLessLenghtThanMinumun = "lu";
-        User user;
+        AppUser appUser;
 
         try
         {
-            user = UserBuilder.anyUser().withName(lastNameWithLessLenghtThanMinumun).build();
+            appUser = UserBuilder.anyUser().withName(lastNameWithLessLenghtThanMinumun).build();
         }
         catch (Exception ex)
         {
@@ -94,12 +94,12 @@ public class UserValidationTest {
     void ValidationOnUserLastNameCaseMoreThanMaximumLenght()
     {
         Exception myException = null;
-        User user;
+        AppUser appUser;
         var lastNameWithMoreThanMaximum = "123456789_123456789_123456789_1";
 
         try
         {
-            user = UserBuilder.anyUser().withName(lastNameWithMoreThanMaximum).build();
+            appUser = UserBuilder.anyUser().withName(lastNameWithMoreThanMaximum).build();
         }
         catch (Exception ex)
         {
@@ -135,12 +135,12 @@ public class UserValidationTest {
     public void ValidationOnEmailCaseWithOutAtSign() throws Exception
     {
         var email = "luisgmail.com";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithEmail(email);
+            appUser = aUserWithEmail(email);
         }
         catch (Exception ex)
         {
@@ -155,21 +155,21 @@ public class UserValidationTest {
     {
         var email = "luis@gmail.com";
 
-        User user =  aUserWithEmail(email);
+        AppUser appUser =  aUserWithEmail(email);
 
-        assertEquals(email, user.getEmail());
+        assertEquals(email, appUser.getEmail());
     }
 
     @Test
     public void ValidationOnEmailCaseWithOutDotCom() throws Exception
     {
         var email = "luis@gmailcom";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithEmail(email);
+            appUser = aUserWithEmail(email);
         }
         catch (Exception ex)
         {
@@ -184,9 +184,9 @@ public class UserValidationTest {
     {
         var email = "luis@gmail.com.ar";
 
-        User user = aUserWithEmail(email);
+        AppUser appUser = aUserWithEmail(email);
 
-        assertEquals(email, user.getEmail());
+        assertEquals(email, appUser.getEmail());
     }
 
 
@@ -195,12 +195,12 @@ public class UserValidationTest {
     public void ValidationOnEmailCaseWithOutCharBeforeAtSign() throws Exception
     {
         var email = "@gmailcom";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithEmail(email);
+            appUser = aUserWithEmail(email);
         }
         catch (Exception ex)
         {
@@ -215,9 +215,9 @@ public class UserValidationTest {
     {
         String email = "l@gmail.com.ar";
 
-        User user = aUserWithEmail(email);
+        AppUser appUser = aUserWithEmail(email);
 
-        assertEquals(email, user.getEmail());
+        assertEquals(email, appUser.getEmail());
     }
 
     //endregion
@@ -227,12 +227,12 @@ public class UserValidationTest {
     public void ValidationOnPasswordCaseLessThanMinimumLowerCase() throws Exception
     {
         var password = "VERY_SECRET";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithPassword(password);
+            appUser = aUserWithPassword(password);
         }
         catch (Exception ex)
         {
@@ -247,12 +247,12 @@ public class UserValidationTest {
     public void ValidationOnPasswordCaseLessThanMinimumUpperCase() throws Exception
     {
         var password = "very_secret";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithPassword(password);
+            appUser = aUserWithPassword(password);
         }
         catch (Exception ex)
         {
@@ -268,12 +268,12 @@ public class UserValidationTest {
     public void ValidationOnPasswordCaseWithOutSpecialCharacter() throws Exception
     {
         var password = "VerySecret";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithPassword(password);
+            appUser = aUserWithPassword(password);
         }
         catch (Exception ex)
         {
@@ -287,12 +287,12 @@ public class UserValidationTest {
     public void ValidationOnPasswordCaseWithLessThanMinimumLength() throws Exception
     {
         var password = "Very!";
-        User user;
+        AppUser appUser;
         Exception myException = null;
 
         try
         {
-            user = aUserWithPassword(password);
+            appUser = aUserWithPassword(password);
         }
         catch (Exception ex)
         {
@@ -307,9 +307,9 @@ public class UserValidationTest {
     {
         String password = "vEry_secret";
 
-        User user = user = aUserWithPassword(password);
+        AppUser appUser = appUser = aUserWithPassword(password);
 
-        assertEquals(password, user.getPassword());
+        assertEquals(password, appUser.getPassword());
     }
 
     //endregion
@@ -320,9 +320,9 @@ public class UserValidationTest {
     {
         String cvu = "123456789_123456789_12";//22 caracteres
 
-        User user = user = aUserWithCVU(cvu);
+        AppUser appUser = appUser = aUserWithCVU(cvu);
 
-        assertEquals(cvu, user.getCvu());
+        assertEquals(cvu, appUser.getCvu());
     }
 
     @Test
@@ -333,7 +333,7 @@ public class UserValidationTest {
 
         try
         {
-            User user = user = aUserWithCVU(cvu);
+            AppUser appUser = appUser = aUserWithCVU(cvu);
         }
         catch (Exception e)
         {
@@ -351,7 +351,7 @@ public class UserValidationTest {
 
         try
         {
-            User user = user = aUserWithCVU(cvu);
+            AppUser appUser = appUser = aUserWithCVU(cvu);
         }
         catch (Exception e)
         {
@@ -368,9 +368,9 @@ public class UserValidationTest {
     {
         String cryptoAddress = "12345678";
 
-        User user = aUserWithCryptoAddress(cryptoAddress);
+        AppUser appUser = aUserWithCryptoAddress(cryptoAddress);
 
-        assertEquals(cryptoAddress, user.getCryptoAddress());
+        assertEquals(cryptoAddress, appUser.getCryptoAddress());
     }
 
     @Test
@@ -381,7 +381,7 @@ public class UserValidationTest {
 
         try
         {
-            User user = aUserWithCryptoAddress(cryptoAddress);
+            AppUser appUser = aUserWithCryptoAddress(cryptoAddress);
         }
         catch (Exception e)
         {
@@ -399,7 +399,7 @@ public class UserValidationTest {
 
         try
         {
-            User user =  aUserWithCryptoAddress(cryptoAddress);
+            AppUser appUser =  aUserWithCryptoAddress(cryptoAddress);
         }
         catch (Exception e)
         {
@@ -418,7 +418,7 @@ public class UserValidationTest {
 
         try
         {
-            User user =  aUserWithAddress(address);
+            AppUser appUser =  aUserWithAddress(address);
         }
         catch (Exception e)
         {
@@ -435,7 +435,7 @@ public class UserValidationTest {
 
         try
         {
-            User user =  aUserWithAddress(address);
+            AppUser appUser =  aUserWithAddress(address);
         }
         catch (Exception e)
         {
@@ -449,8 +449,8 @@ public class UserValidationTest {
     {
         String address = "Francia N220";
 
-        User user = aUserWithAddress(address);
+        AppUser appUser = aUserWithAddress(address);
 
-        assertEquals(address, user.getAddress());
+        assertEquals(address, appUser.getAddress());
     }
 }

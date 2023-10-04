@@ -1,7 +1,7 @@
 package ar.edu.unq.cryptop2p.model.intention;
 
 import ar.edu.unq.cryptop2p.model.Crypto;
-import ar.edu.unq.cryptop2p.model.User;
+import ar.edu.unq.cryptop2p.model.AppUser;
 import ar.edu.unq.cryptop2p.model.exceptions.IntentionPriceException;
 
 import java.text.MessageFormat;
@@ -10,16 +10,16 @@ public abstract class Intention
 {
     protected Crypto crypto;
     protected float amount;
-    private User user;
+    private AppUser appUser;
     private float intentionPrice;
     private float maxIndex = 1.05f;
     private float minIndex = 0.95f;
 
-    protected Intention(Crypto crypto, float amount, float intentionPrice, User user) throws Exception
+    protected Intention(Crypto crypto, float amount, float intentionPrice, AppUser appUser) throws Exception
     {
         this.crypto = crypto;
         this.amount = amount;
-        this.user   = user;
+        this.appUser = appUser;
         setIntentionPrice(intentionPrice);
     }
 
@@ -56,8 +56,8 @@ public abstract class Intention
         return isLessThanMin(intentionPrice) || isGreaterThanMax(intentionPrice);
     }
 
-    public User getUser()
+    public AppUser getUser()
     {
-        return user;
+        return appUser;
     }
 }

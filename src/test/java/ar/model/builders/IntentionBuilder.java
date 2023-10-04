@@ -2,7 +2,7 @@ package ar.model.builders;
 
 import ar.edu.unq.cryptop2p.model.Crypto;
 import ar.edu.unq.cryptop2p.model.CryptoName;
-import ar.edu.unq.cryptop2p.model.User;
+import ar.edu.unq.cryptop2p.model.AppUser;
 import ar.edu.unq.cryptop2p.model.intention.Buy;
 import ar.edu.unq.cryptop2p.model.intention.Intention;
 import ar.edu.unq.cryptop2p.model.intention.Sell;
@@ -16,7 +16,7 @@ public class IntentionBuilder
 {
     private Crypto crypto = new Crypto(CryptoName.BTCUSDT, LocalDateTime.now(), 30000);
     private float amount = 1;
-    private User user = anyUser();
+    private AppUser appUser = anyUser();
     private float intentionPrice = 30000f;
     public String typeOfBuild = "any";
 
@@ -53,9 +53,9 @@ public class IntentionBuilder
         return this;
     }
 
-    public IntentionBuilder withUser (User user)
+    public IntentionBuilder withUser (AppUser appUser)
     {
-        this.user = user;
+        this.appUser = appUser;
         return this;
     }
 
@@ -67,9 +67,9 @@ public class IntentionBuilder
     public Intention build() throws Exception {
         if(Objects.equals(this.typeOfBuild, "buy"))
         {
-            return new Buy(crypto, amount, intentionPrice, user);
+            return new Buy(crypto, amount, intentionPrice, appUser);
         }
-        return  new Sell(crypto, amount, intentionPrice, user);
+        return  new Sell(crypto, amount, intentionPrice, appUser);
     }
 
 

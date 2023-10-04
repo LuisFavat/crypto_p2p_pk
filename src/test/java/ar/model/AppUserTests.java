@@ -6,7 +6,7 @@ import static ar.model.factory.TransactionFactory.anyTransaction;
 import static ar.model.builders.UserBuilder.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserTests
+public class AppUserTests
 {
     @Test
     void if_the_creator_of_the_intention_cancels_the_transaction_the_numbers_of_operations_id_not_modifed_and_reputation_decrease() throws Exception {

@@ -1,6 +1,6 @@
 package ar.model.builders;
 
-import ar.edu.unq.cryptop2p.model.User;
+import ar.edu.unq.cryptop2p.model.AppUser;
 
 public class UserBuilder {
 
@@ -61,8 +61,8 @@ public class UserBuilder {
         return this;
     }
 
-    public User build() throws Exception
+    public AppUser build() throws Exception
     {
-        return new User(name, lastName, address, email, password, "123456789_123456789_12", "12345678", operations, reputation, points);
+        return new AppUser(name, lastName, address, email, password, "123456789_123456789_12", "12345678", operations, reputation, points);
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Transaction
 {
     private Intention intention;
-    private User interesed;
+    private AppUser interesed;
     private Status status;
     private LocalDateTime creationTime;
     private LocalDateTime finishTime;
@@ -17,7 +17,7 @@ public class Transaction
 
 
 
-    public Transaction (Intention intention, User interested, Status status)
+    public Transaction (Intention intention, AppUser interested, Status status)
     {
         this.intention = intention;
         this.interesed = interested;
@@ -82,14 +82,14 @@ public class Transaction
         status = Status.CANCELLED_BY_USER;
     }
 
-    private void punish(User user)
+    private void punish(AppUser appUser)
     {
-        user.punish();
+        appUser.punish();
     }
 
-    public void cancelTransactionAndPunish(User user) throws StateException {
+    public void cancelTransactionAndPunish(AppUser appUser) throws StateException {
         this.cancel();
-        punish(user);
+        punish(appUser);
     }
 
     private float setOperationAmountInPesos()

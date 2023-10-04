@@ -142,7 +142,8 @@ public class TransactionTest {
 
     @Test
     void la_idea_es_probar_que_despues_de_30_min_se_ganan_menos_puntos() throws Exception
-    {/*
+    {
+        /*
         //TODO este test. no funciona y revela la implementacion (se revela que se usa LocalDateTime)
         LocalDateTime creationTime = LocalDateTime.of(2020,1,1,23,35,00);
         LocalDateTime finishTime = LocalDateTime.of(2020,1,2,00,05,01);
@@ -157,6 +158,7 @@ public class TransactionTest {
             transaction = aTransaction().withInteresedUser(interesedUser).withIntention(intention).build();
             mockedStatic.when(LocalDateTime::now).thenReturn(finishTime);
             transaction.notificationOfCashTransferred();
+            transaction.notificationOfCryptoTransfered();
 //            try (MockedStatic<Duration> dur = mockStatic(Duration.class)) {
 //                dur.when(Duration::).thenReturn();
 //                transaction.notificationOfCryptoTransfered();
@@ -175,7 +177,9 @@ public class TransactionTest {
 //        }
 
         assertEquals(15, intentionUser.getPoints());
-        assertEquals(105, interesedUser.getPoints());*/
+        assertEquals(105, interesedUser.getPoints());
+
+         */
     }
 
 
