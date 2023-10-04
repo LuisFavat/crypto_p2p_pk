@@ -11,7 +11,7 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    //TODO question aca tuve que inicializar asi, no me toma el new del constructor
+    //TODO question aca tuve que inicializar asi, no me toma el new del constructor.
     @Transient
     private UserDataValidator validator = new UserDataValidator();
     private String name;
