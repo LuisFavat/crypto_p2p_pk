@@ -1,11 +1,15 @@
 package ar.edu.unq.cryptop2p.model.Validators;
 
+import jakarta.persistence.Transient;
+
 import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validator
+
+public class  UserDataValidator
 {
+
     private int minPasswordLength = 6;
     private int maxPasswordLength = 30;
     private String passwordExpetionMessage = "Invalid password format.";

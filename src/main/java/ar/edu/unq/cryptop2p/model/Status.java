@@ -1,8 +1,10 @@
 package ar.edu.unq.cryptop2p.model;
 
 public enum Status {
-    active,
-    cancelled,
-    succesful
+    STEP_1_WAITING_CASH_TRANSFER_CONFIRMATION,
+    STEP_2_WAITING_CRYPTO_TRANSFER_CONFIRMATION,
+    CANCELLED_BY_USER,
+    CANCELLED_BY_SYSTEM_PRICE_OUT_OF_RANGE,
+    SUCCESFUL
 
 }

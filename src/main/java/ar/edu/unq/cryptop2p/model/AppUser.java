@@ -1,23 +1,40 @@
 package ar.edu.unq.cryptop2p.model;
 
-import ar.edu.unq.cryptop2p.model.Validators.Validator;
+import ar.edu.unq.cryptop2p.model.Validators.UserDataValidator;
 import ar.edu.unq.cryptop2p.model.exceptions.*;
+import jakarta.persistence.*;
 
 import java.text.MessageFormat;
+@Entity
+public class AppUser {
 
-public class User {
-    private Validator validator = new Validator();
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+    //TODO question aca tuve que inicializar asi, no me toma el new del constructor
+    @Transient
+    private UserDataValidator validator = new UserDataValidator();
     private String name;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
     private String cvu;
     private String cryptoAddress;
     private String address;
-    private int operations;
+    private int succesfulOperations;
+    private int points;
+    private float reputation;
+    @Transient
+    private float punishReputation = 20f;
+    @Transient
+    private int pointBeforeTimeLimit = 10;
+    @Transient
+    private int pointAfterTimeLimit = 5;
+    @Transient
+    private int durationMinutesLimit = 0;
 
-
-    public User(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress) throws Exception {
+    public AppUser(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress, int succesfulOperations, float reputation, int points) throws Exception {
        setName(aName);
        setLastName(aLastName);
        setAddres(aAddress);
@@ -25,7 +42,16 @@ public class User {
        setPassword(aPassword);
        setCvu(aCvu);
        setCryptoAddress(aCryptoAddress);
-       operations = 0;
+       this.succesfulOperations = succesfulOperations;
+       this.points = points;
+       this.reputation = reputation;
+       this.validator =  new UserDataValidator();
+
+    }
+
+    public int getPoints()
+    {
+        return points;
     }
 
     public void setName(String aName) throws UserNameException {
@@ -126,4 +152,44 @@ public class User {
         return cryptoAddress;
     }
     //endregion
+    public float getReputation()
+    {
+        return reputation;
+    }
+
+    public int getSuccesfulOperations()
+    {
+        return succesfulOperations;
+    }
+
+    public void punish()
+    {
+        if(reputation - punishReputation < 0)
+        {
+            reputation = 0;
+        }
+        else
+        {
+            reputation -= punishReputation;
+        }
+    }
+
+    public void addPointsAccordingToDuration(long transactionDuration)
+    {
+        if(transactionDuration <= durationMinutesLimit)
+        {
+           // points += pointBeforeTimeLimit;
+            addPoints(pointBeforeTimeLimit);
+        }
+        else
+        {
+            //points += pointAfterTimeLimit;
+            addPoints(pointAfterTimeLimit);
+        }
+    }
+
+    private void addPoints(int points)
+    {
+        this.points += points;
+    }
 }

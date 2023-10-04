@@ -4,9 +4,11 @@ public  class USD {
 
     private static float price;
 
+
     public USD(float price)
     {
         USD.price = price;
+        //excepcion
     }
 
     public static void setPrice(float price)
