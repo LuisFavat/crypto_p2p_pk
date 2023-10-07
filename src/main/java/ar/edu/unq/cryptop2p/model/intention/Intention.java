@@ -1,25 +1,36 @@
 package ar.edu.unq.cryptop2p.model.intention;
 
-import ar.edu.unq.cryptop2p.model.Crypto;
+import ar.edu.unq.cryptop2p.model.Cryptos.Crypto;
 import ar.edu.unq.cryptop2p.model.AppUser;
+import ar.edu.unq.cryptop2p.model.Cryptos.CryptoName;
 import ar.edu.unq.cryptop2p.model.exceptions.IntentionPriceException;
+import jakarta.persistence.*;
 
 import java.text.MessageFormat;
 
+@Entity
 public abstract class Intention
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    protected int id;
+
+    @ManyToOne
     protected Crypto crypto;
     protected float amount;
-    private AppUser appUser;
+    @ManyToOne
+    private AppUser IntentionUser;
     private float intentionPrice;
+    @Transient
     private float maxIndex = 1.05f;
+    @Transient
     private float minIndex = 0.95f;
 
-    protected Intention(Crypto crypto, float amount, float intentionPrice, AppUser appUser) throws Exception
+    protected Intention(Crypto crypto, float amount, float intentionPrice, AppUser IntentionUser) throws Exception
     {
         this.crypto = crypto;
         this.amount = amount;
-        this.appUser = appUser;
+        this.IntentionUser = IntentionUser;
         setIntentionPrice(intentionPrice);
     }
 
@@ -58,6 +69,6 @@ public abstract class Intention
 
     public AppUser getUser()
     {
-        return appUser;
+        return IntentionUser;
     }
 }

@@ -1,4 +1,4 @@
-package ar.edu.unq.cryptop2p.model;
+package ar.edu.unq.cryptop2p.model.Cryptos;
 
 public enum CryptoName {
     ALICEUSDT,

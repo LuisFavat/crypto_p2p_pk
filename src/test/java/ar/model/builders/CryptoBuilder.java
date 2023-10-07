@@ -1,7 +1,7 @@
 package ar.model.builders;
 
-import ar.edu.unq.cryptop2p.model.Crypto;
-import ar.edu.unq.cryptop2p.model.CryptoName;
+import ar.edu.unq.cryptop2p.model.Cryptos.Crypto;
+import ar.edu.unq.cryptop2p.model.Cryptos.CryptoName;
 
 import java.time.LocalDateTime;
 

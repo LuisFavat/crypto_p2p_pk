@@ -1,10 +1,18 @@
-package ar.edu.unq.cryptop2p.model;
+package ar.edu.unq.cryptop2p.model.Cryptos;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 import java.time.LocalDateTime;
 
+@Entity
 public class Crypto {
+    @Id
     private CryptoName name;
+    @Transient
     private LocalDateTime time;
+    @Transient
     private float price;
 
     public Crypto(CryptoName name, LocalDateTime time, float price)

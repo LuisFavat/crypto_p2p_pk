@@ -1,6 +1,6 @@
 package ar.edu.unq.cryptop2p.model.intention;
 
-import ar.edu.unq.cryptop2p.model.Crypto;
+import ar.edu.unq.cryptop2p.model.Cryptos.Crypto;
 import ar.edu.unq.cryptop2p.model.AppUser;
 
 public class Buy extends Intention
