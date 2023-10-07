@@ -10,26 +10,11 @@ import org.springframework.stereotype.Service;
 public class UserService
 {
     @Autowired
-    UserRepository userRepository;
+    UserRepository repository;
     public UserRegisterDTO register(UserRegisterDTO userData) throws Exception {
-         AppUser appUser = new AppUser(userData.getName(),
-                            userData.getLastName(),
-                            userData.getAddress(),
-                            userData.getEmail(),
-                            userData.getPassword(),
-                            userData.getCvu(),
-                            userData.getCryptoAddress(),
-                            0,
-                            0,
-                            0);
+        AppUser user = userData.toObjectModel();
+        repository.save(user);
+        return  userData;
 
-         userRepository.save(appUser);
-         return new UserRegisterDTO(appUser.getName(),
-                 appUser.getLastName(),
-                 appUser.getAddress(),
-                 appUser.getEmail(),
-                 appUser.getPassword(),
-                 appUser.getCvu(),
-                 appUser.getCryptoAddress());
     }
 }

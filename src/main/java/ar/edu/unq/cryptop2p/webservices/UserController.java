@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("api/user")
 public class UserController
@@ -13,7 +14,8 @@ public class UserController
     @Autowired
     private UserService service;
 
-    @PutMapping("/register")
+
+    @PostMapping("/register")
     public ResponseEntity<UserRegisterDTO> register(@RequestBody UserRegisterDTO user)
     {
         UserRegisterDTO userRegister = null;
