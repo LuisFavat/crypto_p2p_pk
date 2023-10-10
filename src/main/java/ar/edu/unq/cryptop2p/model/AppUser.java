@@ -13,7 +13,7 @@ public class AppUser {
     private int id;
     //TODO question aca tuve que inicializar asi, no me toma el new del constructor.
     @Transient
-    private UserDataValidator validator = new UserDataValidator();
+    private UserDataValidator validator;// = new UserDataValidator();
     private String name;
     private String lastName;
     @Column(unique = true)
@@ -33,6 +33,11 @@ public class AppUser {
     private int pointAfterTimeLimit = 5;
     @Transient
     private int durationMinutesLimit = 0;
+
+    public AppUser()
+    {
+
+    }
 
     public AppUser(String aName, String aLastName, String aAddress, String aEmail, String aPassword, String aCvu, String aCryptoAddress, int succesfulOperations, float reputation, int points) throws Exception {
        setName(aName);

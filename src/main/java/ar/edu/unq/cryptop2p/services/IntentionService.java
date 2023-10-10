@@ -24,8 +24,8 @@ public class IntentionService
     public IntentionDTO createBuy(IntentionDTO intentionBuyDTO) throws Exception {
         //TODO usar una pool de cryptos desde el dto
         Crypto btc = new Crypto(CryptoName.BTCUSDT, LocalDateTime.now(), 30000);
-        var userO  = userRepository.findById(1L);
-        var user = userO.get();
+        var optionalUser  = userRepository.findById(1L);
+        var user = optionalUser.get();
 
         Buy intentionBuy = intentionBuyDTO.toObjectModel(btc,user);
         intentionRepository.save(intentionBuy);

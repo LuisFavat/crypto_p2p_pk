@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<AppUser, Long>
 {
-    Optional<AppUser> findById(Integer id);
+    Optional<AppUser> findById(Long id);
 }
