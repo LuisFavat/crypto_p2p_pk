@@ -13,7 +13,7 @@ public class AppUser {
     private int id;
     //TODO question aca tuve que inicializar asi, no me toma el new del constructor.
     @Transient
-    private UserDataValidator validator;// = new UserDataValidator();
+    private UserDataValidator validator = new UserDataValidator();
     private String name;
     private String lastName;
     @Column(unique = true)
