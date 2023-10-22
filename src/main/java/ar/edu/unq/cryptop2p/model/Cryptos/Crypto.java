@@ -1,8 +1,7 @@
 package ar.edu.unq.cryptop2p.model.Cryptos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +13,8 @@ public class Crypto {
     private LocalDateTime time;
     @Transient
     private float price;
+
+    protected Crypto(){}
 
     public Crypto(CryptoName name, LocalDateTime time, float price)
     {

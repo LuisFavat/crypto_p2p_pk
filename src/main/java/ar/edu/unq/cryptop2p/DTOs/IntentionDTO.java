@@ -38,7 +38,16 @@ public class IntentionDTO
         return intentionBuy;
     }
 
+    public void setCryptoName(CryptoName cryptoName) {
+        this.cryptoName = cryptoName;
+    }
+
+    public void setIntentionPrice(float intentionPrice) {
+        this.intentionPrice = intentionPrice;
+    }
+
     public int getAppUserID() {
         return appUserID;
     }
+    public float getAmount() {return  amount;}
 }

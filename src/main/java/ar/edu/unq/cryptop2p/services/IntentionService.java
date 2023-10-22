@@ -6,6 +6,7 @@ import ar.edu.unq.cryptop2p.model.Cryptos.Crypto;
 import ar.edu.unq.cryptop2p.model.Cryptos.CryptoName;
 
 import ar.edu.unq.cryptop2p.model.intention.Buy;
+import ar.edu.unq.cryptop2p.repositories.CryptoRepository;
 import ar.edu.unq.cryptop2p.repositories.IntentionRepository;
 import ar.edu.unq.cryptop2p.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,13 @@ public class IntentionService
     IntentionRepository intentionRepository;
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CryptoRepository cryptoRepository;
     public IntentionDTO createBuy(IntentionDTO intentionBuyDTO) throws Exception {
         //TODO usar una pool de cryptos desde el dto
         Crypto btc = new Crypto(CryptoName.BTCUSDT, LocalDateTime.now(), 30000);
+        cryptoRepository.save(btc);
         var optionalUser  = userRepository.findById(1L);
         var user = optionalUser.get();
 
